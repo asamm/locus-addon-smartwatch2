@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Name of application -->
+    <string name="app_name">Locus Map - add-on SmartWatch2</string>
+    <!-- Button with application info -->
+    <string name="about_application">About application</string>
+    <!-- Visible label on screen -->
+    <string name="azimuth">Azimuth</string>
+    <!-- Visible label on screen -->
+    <string name="distance">Distance</string>
+    <!-- Label for menu -->
+    <string name="guidance">Guidance</string>
+    <!-- header for track record profile chooser -->
+    <string name="choose_track_rec_profile">Choose track record profile</string>
+    <!-- Information that we needs new version of Locus -->
+    <string name="invalid_locus_version">Invalid Locus version</string>
+    <!-- Information that Locus needs to run -->
+    <string name="locus_not_running">Locus is not running</string>
+    <!-- Label for panel with distance to navigation command -->
+    <string name="navigation_command">Command</string>
+    <!-- Label visible when no target is selected -->
+    <string name="no_target">No target</string>
+    <!-- Title of preference activity -->
+    <string name="preference_activity_title">Locus SmartWatch settings</string>
+    <!-- Information string for users -->
+    <string name="periodic_updates_not_enabled">Periodic updates are not enabled</string>
+    <!-- title for track recording -->
+    <string name="recording">Recording…</string>
+    <!-- Visible label on screen -->
+    <string name="speed">Speed</string>
+    <!-- Start Locus label for buttons -->
+    <string name="start_locus">Start Locus</string>
+    <!-- Visible label on screen -->
+    <string name="time">Time</string>
+    <!-- Label for menu -->
+    <string name="track_record">Track record</string>
+    <!-- Label for menu -->
+    <string name="track_record_no_profiles">No profiles are defined for track recording</string>
+    <!-- Unknown problem happen -->
+    <string name="unknown_problem">Unknown problem</string>
+    <!-- version of application -->
+    <string name="version">Version</string>
+    <!-- Extension is currently waiting on new data -->
+    <string name="waiting_on_new_data">Waiting on new data</string>
+</resources>

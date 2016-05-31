@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/smart_watch_2_control_width"
+    android:layout_height="@dimen/smart_watch_2_control_height"
+    android:background="@color/white"
+    tools:ignore="ContentDescription,PxUsage" >
+
+    <TextView
+        style="@style/TextViewScreenTitle"
+        android:id="@+id/text_view_screen_title" />
+
+    <ImageView
+        android:id="@+id/image_view_main"
+        android:layout_width="@dimen/view_image_width"
+        android:layout_height="@dimen/view_image_height"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_view_screen_title"
+        android:layout_centerInParent="true"
+        android:clickable="true" />
+
+    <View
+        style="@style/SeparatorVertical"
+        android:id="@+id/image_view_separator_ver"
+        android:layout_below="@+id/text_view_screen_title"
+        android:layout_toRightOf="@+id/image_view_main" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/text_view_screen_title"
+        android:layout_toRightOf="@+id/image_view_separator_ver"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/TextViewTitle"
+            android:id="@+id/text_view_info_01_title"
+            android:text="@string/distance" />
+
+        <TextView
+            android:id="@+id/text_view_info_01"
+            style="@style/TextViewValue" />
+
+        <View style="@style/SeparatorHorizontal" />
+
+        <TextView
+            style="@style/TextViewTitle"
+            android:id="@+id/text_view_info_02_title"
+            android:text="@string/time" />
+
+        <TextView
+            android:id="@+id/text_view_info_02"
+            style="@style/TextViewValue" />
+
+        <View style="@style/SeparatorHorizontal" />
+
+        <TextView
+            style="@style/TextViewTitle"
+            android:id="@+id/text_view_info_03_title"
+            android:text="@string/azimuth" />
+
+        <TextView
+            android:id="@+id/text_view_info_03"
+            style="@style/TextViewValue" />
+    </LinearLayout>
+
+</RelativeLayout>
