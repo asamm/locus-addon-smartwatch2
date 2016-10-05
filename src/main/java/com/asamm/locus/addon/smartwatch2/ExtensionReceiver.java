@@ -31,10 +31,11 @@ Copyright (c) 2011-2013, Sony Mobile Communications AB
  */
 package com.asamm.locus.addon.smartwatch2;
 
-import locus.api.utils.Logger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import locus.api.utils.Logger;
 
 /**
  * The extension receiver receives the extension intents and starts the
@@ -43,7 +44,7 @@ import android.content.Intent;
 public class ExtensionReceiver extends BroadcastReceiver {
 
     // tag for logger
-	private static final String TAG = ExtensionReceiver.class.getSimpleName();
+	private static final String TAG = "ExtensionReceiver";
 	
     @Override
     public void onReceive(final Context context, final Intent intent) {

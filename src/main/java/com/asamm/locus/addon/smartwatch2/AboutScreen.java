@@ -8,7 +8,7 @@ import android.widget.TextView;
 public class AboutScreen extends Activity {
 
     // tag for logger
-    private static final String TAG = AboutScreen.class.getSimpleName();
+    private static final String TAG = "AboutScreen";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

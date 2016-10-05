@@ -49,7 +49,7 @@ import com.sonyericsson.extras.liveware.extension.util.registration.Registration
 public class MainExtensionService extends ExtensionService {
 
     // tag for logger
-	public static final String TAG = MainExtensionService.class.getSimpleName();
+	public static final String TAG = "MainExtensionService";
 
 	public static final String EXTENSION_KEY = "com.asamm.locus.addon.smartwatch2.key";
 

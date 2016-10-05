@@ -5,8 +5,8 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        versionCode 2
-        versionName '1.1'
+        versionCode 3
+        versionName '1.2'
 
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -22,12 +22,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    // enable lint in project
+    // set lint in project
     lintOptions {
-        checkReleaseBuilds true
-        abortOnError true
-        absolutePaths false
-        lintConfig file("../lint-global.xml")
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     // signing of versions
@@ -67,5 +65,5 @@ android {
 
 dependencies {
     // get locus API
-    compile 'com.asamm:locus-api-android:0.2.2'
+    compile 'com.asamm:locus-api-android:0.2.6'
 }

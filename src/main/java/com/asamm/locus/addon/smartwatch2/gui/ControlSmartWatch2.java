@@ -1,5 +1,6 @@
 package com.asamm.locus.addon.smartwatch2.gui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -37,6 +38,7 @@ import locus.api.android.utils.LocusUtils.LocusVersion;
 import locus.api.android.utils.UtilsFormat;
 import locus.api.android.utils.exceptions.RequiredVersionMissingException;
 import locus.api.objects.extra.Location;
+import locus.api.objects.extra.TrackStats;
 import locus.api.utils.Logger;
 
 /**
@@ -44,6 +46,7 @@ import locus.api.utils.Logger;
  * class exists in one instance for every supported host application that we
  * have registered to
  */
+@SuppressLint ("InflateParams")
 public class ControlSmartWatch2 extends ControlExtension {
 
     // tag for logger
@@ -77,23 +80,24 @@ public class ControlSmartWatch2 extends ControlExtension {
     private static final float MAP_SCALE = 2.5f;
 
     // format for time formatting
-    public static final SimpleDateFormat TIME_FORMAT =
+    private static final SimpleDateFormat TIME_FORMAT =
 			new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
     static {
         TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC+0"));
     }
 
-    public enum ScreenMode {
+    private enum ScreenMode {
     	GUIDING, TRACK_RECORD
     }
     
-	public enum ScreenGuidingImageMode {
+	private enum ScreenGuidingImageMode {
 		COMPASS, MAP
 	}
 	
-	public enum StartTestResult {
+	private enum StartTestResult {
 		NO_PROBLEM,
-		LOCUS_INVALID,
+		LOCUS_INVALID_01,
+		LOCUS_INVALID_02
 	}
 
     // current context
@@ -216,7 +220,7 @@ public class ControlSmartWatch2 extends ControlExtension {
 
             // check if object exists
             if (mLocusVersion == null) {
-                mStartResult = StartTestResult.LOCUS_INVALID;
+                mStartResult = StartTestResult.LOCUS_INVALID_01;
                 return;
             }
 
@@ -234,7 +238,7 @@ public class ControlSmartWatch2 extends ControlExtension {
 
             // clear data
             mLocusVersion = null;
-            mStartResult = StartTestResult.LOCUS_INVALID;
+            mStartResult = StartTestResult.LOCUS_INVALID_02;
         }
 
         // refresh layout
@@ -400,7 +404,7 @@ public class ControlSmartWatch2 extends ControlExtension {
      * Update content with fresh updates.
      * @param update update container
      */
-	protected void onUpdate(UpdateContainer update) {
+	void onUpdate(UpdateContainer update) {
 		mLastUpdate = update;
 		refreshData();
 	}
@@ -408,7 +412,7 @@ public class ControlSmartWatch2 extends ControlExtension {
     /**
      * Notify about incorrect data.
      */
-    protected void onIncorrectData() {
+	void onIncorrectData() {
         Logger.logW(TAG, "onIncorrectData()");
 		mLastUpdate = null;
 		refreshData();
@@ -460,8 +464,15 @@ public class ControlSmartWatch2 extends ControlExtension {
     private void refreshEmptyLayout() {
     	String infoText;
         boolean showOpenLocus = false;
-    	if (mStartResult == StartTestResult.LOCUS_INVALID || mLocusInfo == null) {
-    		infoText = mContext.getString(R.string.invalid_locus_version);
+		if (mLocusInfo == null) {
+			infoText = mContext.getString(R.string.invalid_locus_version) +
+					", err: " + 1;
+		} else if (mStartResult == StartTestResult.LOCUS_INVALID_01) {
+    		infoText = mContext.getString(R.string.invalid_locus_version) +
+					", err: " + 2;
+		} else if (mStartResult == StartTestResult.LOCUS_INVALID_02) {
+			infoText = mContext.getString(R.string.invalid_locus_version) +
+					", err: " + 3;
         } else if (!mLocusInfo.isRunning()) {
             infoText = mContext.getString(R.string.locus_not_running);
             showOpenLocus = true;
@@ -666,18 +677,17 @@ public class ControlSmartWatch2 extends ControlExtension {
         } else {
             // set correct layout
             setLayout(R.layout.screen_track_record_running);
-            UpdateContainer.TrackRecordContainer trackRecData =
-                    mLastUpdate.getTrackRecordContainer();
+			TrackStats stats = mLastUpdate.getTrackRecStats();
 
             // update title
             sendText(R.id.text_view_screen_title,
-                    trackRecData.getActiveProfileName());
+                    mLastUpdate.getTrackRecProfileName());
 
             // update text content
             sendText(R.id.text_view_info_01, UtilsFormat.formatDistance(
-                    mLocusInfo.getUnitsFormatLength(), trackRecData.getDistance(), false));
+                    mLocusInfo.getUnitsFormatLength(), stats.getTotalLength(), false));
             sendText(R.id.text_view_info_02,
-                    TIME_FORMAT.format(trackRecData.getTime()));
+                    TIME_FORMAT.format(stats.getTotalTime()));
 
         }
     }
@@ -764,7 +774,7 @@ public class ControlSmartWatch2 extends ControlExtension {
                 R.layout.screen_empty_with_button, null);
         ControlViewGroup cvStartScreen = parseLayout(layout);
         if (cvStartScreen == null) {
-            return cvStartScreen;
+            return null;
         }
 
         // set click listener
@@ -789,7 +799,7 @@ public class ControlSmartWatch2 extends ControlExtension {
                 R.layout.screen_guidance, null);
         ControlViewGroup cvGuiding = parseLayout(layout);
         if (cvGuiding == null) {
-            return cvGuiding;
+            return null;
         }
 
         // set click listener
@@ -864,7 +874,7 @@ public class ControlSmartWatch2 extends ControlExtension {
                 R.layout.screen_track_record_running, null);
         ControlViewGroup cvTrackRecRunning = parseLayout(layout);
         if (cvTrackRecRunning == null) {
-            return cvTrackRecRunning;
+            return null;
         }
 
         // set click listener
@@ -888,7 +898,7 @@ public class ControlSmartWatch2 extends ControlExtension {
                     @Override
                     public void onClick() {
                         // start or pause track recording
-                        if (!mLastUpdate.getTrackRecordContainer().isTrackRecPaused()) {
+                        if (!mLastUpdate.isTrackRecPaused()) {
                             trackRecordPause();
                         } else {
                             trackRecordStart("");

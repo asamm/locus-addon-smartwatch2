@@ -11,16 +11,16 @@ import com.sonyericsson.extras.liveware.extension.util.registration.Registration
 /**
  * Provides information needed during extension registration
  */
-public class RegisterInformation extends RegistrationInformation {
+class RegisterInformation extends RegistrationInformation {
 
-    final Context mContext;
+	// reference to context
+    private final Context mContext;
 
     /**
      * Create control registration object
-     *
      * @param context The context
      */
-    protected RegisterInformation(Context context) {
+	RegisterInformation(Context context) {
         if (context == null) {
             throw new IllegalArgumentException("context == null");
         }

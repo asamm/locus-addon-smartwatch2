@@ -1,7 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.asamm.locus.addon.smartwatch2">
 
-    <uses-permission android:name="com.sonyericsson.extras.liveware.aef.EXTENSION_PERMISSION" />
+    <uses-permission
+        android:name="com.sonyericsson.extras.liveware.aef.EXTENSION_PERMISSION" />
 
     <application
         android:allowBackup="false"
@@ -12,8 +14,10 @@
         <activity
             android:name=".AboutScreen"
             android:label="@string/app_name" >
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action
+                    android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 
@@ -21,8 +25,10 @@
             android:name=".MainExtensionService" />
 
         <!-- receiver for periodic updates -->
-        <receiver android:name=".gui.PeriodicUpdatesReceiver"
+        <receiver
+            android:name=".gui.PeriodicUpdatesReceiver"
             android:enabled="false">
+
             <intent-filter>
                 <action
                     android:name="locus.api.android.ACTION_PERIODIC_UPDATE" />
@@ -33,8 +39,8 @@
         <receiver
             android:name=".ExtensionReceiver"
             android:permission="com.sonyericsson.extras.liveware.aef.HOSTAPP_PERMISSION" >
-            <intent-filter>
 
+            <intent-filter>
                 <!-- Generic extension intents. -->
                 <action android:name="com.sonyericsson.extras.liveware.aef.registration.EXTENSION_REGISTER_REQUEST" />
                 <action android:name="com.sonyericsson.extras.liveware.aef.registration.ACCESSORY_CONNECTION" />
