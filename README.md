@@ -1,4 +1,4 @@
-![Logo](locus-addon-smartwatch2/src/main/res/drawable-xxhdpi/ic_launcher.png)
+![Logo](app/src/main/res/drawable-xxhdpi/ic_launcher.png)
 
 # Locus Map - add-on SmartWatch2
 
