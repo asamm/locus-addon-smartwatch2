@@ -1,6 +1,4 @@
-![Logo](app/src/main/res/drawable-xxhdpi/ic_launcher.png)
-
-# Locus Map - add-on SmartWatch2
+# Smartwatch2 for Locus Map ![logo](app/src/main/res/drawable-mdpi/ic_launcher.png "Contacts for Locus Map logo")
 
 Add-on for [Locus Map](http://www.locusmap.eu) (Android) application. Leave your huge smartphone in your pocket or backpack and enjoy Locus Map in your SmartWatch2! With this brand new Locus Map add-on you have your favorite outdoor map app directly on your wrist! You can control comfortably the most frequently used features:
 
